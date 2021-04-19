@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using SignalRTest.Hubs;
+using SignalRTest.Services;
 
-namespace SignalRTest
+namespace SignalRTest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

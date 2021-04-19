@@ -33,12 +33,52 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Controllers/ChartController.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Controllers/WeatherForecastController.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/SignalRTest/DataManager.cs">
           <value>
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Hubs/ChartHub.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Hubs/ChatHub.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Models/ChartModel.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Models/WeatherForecast.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/SignalRTest/README.md">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Services/DataManager.cs">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/SignalRTest/Services/TimerManager.cs">
           <value>
             <set />
           </value>

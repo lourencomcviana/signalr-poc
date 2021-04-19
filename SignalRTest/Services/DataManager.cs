@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using SignalRTest.Models;
 
-namespace SignalRTest
+namespace SignalRTest.Services
 {
     public static class DataManager
     {

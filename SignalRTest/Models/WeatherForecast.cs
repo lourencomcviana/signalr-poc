@@ -1,6 +1,6 @@
 using System;
 
-namespace SignalRTest
+namespace SignalRTest.Models
 {
     public class WeatherForecast
     {

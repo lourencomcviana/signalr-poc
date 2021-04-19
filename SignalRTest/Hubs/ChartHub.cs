@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.SignalR;
 
-namespace SignalRTest
+namespace SignalRTest.Hubs
 {
     public class ChartHub: Hub
     {

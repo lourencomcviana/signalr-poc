@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace SignalRTest
+namespace SignalRTest.Models
 {
     public class ChartModel
     {

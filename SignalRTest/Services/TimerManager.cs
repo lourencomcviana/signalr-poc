@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace SignalRTest
+namespace SignalRTest.Services
 {
     public class TimerManager
     {
