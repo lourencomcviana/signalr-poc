@@ -18,7 +18,7 @@ namespace SignalRTest
 
             if (isService)
             {
-                
+                throw new NotImplementedException("ver https://dev.to/sumitkharche/how-to-host-asp-net-core-3-1-web-applications-as-windows-service-52k2");
             }
             else
             {
