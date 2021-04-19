@@ -1,46 +1,55 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
-import { Observable, of } from 'rxjs';
-import { SignalRService } from './services/signal-r.service';
-
+import {Component, OnInit} from '@angular/core';
+import { ChartService } from './services/chart.service';
+import { ChatService } from './services/chat.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  implements OnInit {
   title = 'client';
-  messages:string[];
-  
-  constructor(public signalRService: SignalRService, private http: HttpClient) {
-    this.messages = []
+  messages: string[];
+  usuario: string;
+  mensagem: string;
+
+  constructor(public signalRService: ChartService, public  chatService: ChatService, private http: HttpClient) {
+    this.messages = [];
+    this.mensagem = '';
+    this.usuario = '';
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // createObs().subscribe(message =>{
     //   console.log(message)
     // })
 
-    this.signalRService.startConnection();
-    this.signalRService.addTransferChartDataListener();
-    this.startHttpRequest();
+    // this.signalRService.startConnection();
+    // this.signalRService.addTransferChartDataListener();
+    // this.startHttpRequest();
+    this.chatService.start().subscribe(() => {
+      this.chatService.listen().subscribe(message => {
+        this.messages.push(message);
+      });
+    });
   }
 
   private startHttpRequest = () => {
     this.http.get('https://localhost:5001/weatherforecast')
       .subscribe((res: any) => {
         console.log(res);
-      })
+      });
 
     this.http.get('https://localhost:5001/api/chart')
       .subscribe((res: any) => {
         console.log(res);
-      })
+      });
   }
 
-  sendMessage() {
-    console.log('nostalgia!')
-    // send('foi', 'primeira mensagem')
+  sendMessage(): void {
+    this.chatService.send(this.usuario, this.mensagem)
+      .subscribe(() => {
+        console.log('mensagem enviada!');
+      });
   }
 }

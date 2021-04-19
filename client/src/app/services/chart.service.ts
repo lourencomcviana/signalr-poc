@@ -1,27 +1,33 @@
 import { Injectable } from '@angular/core';
-import * as signalR from "@microsoft/signalr";
+import * as signalR from '@microsoft/signalr';
 import { ChartModel } from '../interfaces/ChartModel';
+import Constants from '../classes/Constants';
+
+
+export const url = {
+  chartHub: `${Constants.API_BASE_URL}/chart`
+};
 
 @Injectable({
   providedIn: 'root'
 })
-export class SignalRService {
+export class ChartService {
 
   public data: ChartModel[];
   private hubConnection?: signalR.HubConnection
 
   constructor() {
-    this.data = []
+    this.data = [];
   }
 
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:5001/chart')
+      .withUrl(url.chartHub)
       .build();
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
-      .catch(err => console.log('Error while starting connection: ' + err))
+      .catch(err => console.log('Error while starting connection: ' + err));
   }
 
   public addTransferChartDataListener = () => {
@@ -31,8 +37,7 @@ export class SignalRService {
         console.log(data);
       });
     } else {
-      console.log('precisa iniciar a conexão')
+      console.log('precisa iniciar a conexão');
     }
   }
-  
 }
