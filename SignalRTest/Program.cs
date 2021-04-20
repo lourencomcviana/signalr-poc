@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
@@ -12,22 +8,38 @@ namespace SignalRTest
 {
     public class Program
     {
+        public static bool isService { get; set; }
         public static void Main(string[] args)
         {
-            var isService = !(Debugger.IsAttached || args.Contains("--console"));
+            ILogger<Program> logger = CreateLogger();
+            
+            isService = !(Debugger.IsAttached || args.Contains("--console"));
 
+            IHostBuilder builder;
             if (isService)
             {
-                throw new NotImplementedException("ver https://dev.to/sumitkharche/how-to-host-asp-net-core-3-1-web-applications-as-windows-service-52k2");
+                logger.LogInformation("executando como serviço");
+                builder = CreateHostBuilderWindowsService(args);
             }
             else
             {
-                CreateHostBuilder(args).Build().Run();
+                logger.LogInformation("executando como aplicação");
+                builder = CreateHostBuilder(args);
             }
+            builder.Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+        private static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+        
+        private static IHostBuilder CreateHostBuilderWindowsService(string[] args) =>
+            CreateHostBuilder(args).UseWindowsService();
+        
+        private static ILogger<Program> CreateLogger() =>
+            LoggerFactory
+                .Create(logging => logging.AddConsole())
+                .CreateLogger<Program>();
+        
     }
 }

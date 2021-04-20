@@ -31,13 +31,6 @@ namespace SignalRTest
                 );
             });
             
-            // services.AddCors(options =>
-            //     options.AddDefaultPolicy(builder => builder
-            //         .AllowAnyOrigin()
-            //         .AllowAnyMethod()
-            //         .AllowAnyHeader())
-            //     );
-            
             services.AddSignalR();
             services.AddControllers();
             

@@ -6,3 +6,14 @@ https://code-maze.com/netcore-signalr-angular/
 
 ## Criar aplicação como serviço
 https://dev.to/sumitkharche/how-to-host-asp-net-core-3-1-web-applications-as-windows-service-52k2"
+
+### Pacotes para adicionar
+- dotnet add package Microsoft.Extensions.Hosting.WindowsServices
+
+### Publish
+- dotnet publish -c Release -r win-x64 --self-contained
+- sc create SignalRTest binPath="H:\workspace\zup\SignalRTest\bin\SignalRTest.exe"
+  
+### Start and check
+- net start SignalRTest
+- sc query SignalRTest
