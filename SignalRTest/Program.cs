@@ -14,6 +14,7 @@ namespace SignalRTest
             ILogger<Program> logger = CreateLogger();
             
             isService = !(Debugger.IsAttached || args.Contains("--console"));
+            //  isService = !(Debugger.IsAttached || !args.Contains("--service")); 
 
             IHostBuilder builder;
             if (isService)

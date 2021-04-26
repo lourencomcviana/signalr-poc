@@ -29,7 +29,7 @@ export class AppComponent  implements OnInit {
     // this.startHttpRequest();
     this.chatService.start().subscribe(() => {
       this.chatService.listen().subscribe(message => {
-        this.messages.push(message);
+        this.messages.push(message as unknown as string);
       });
     });
   }
