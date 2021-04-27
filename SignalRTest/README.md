@@ -17,3 +17,7 @@ https://dev.to/sumitkharche/how-to-host-asp-net-core-3-1-web-applications-as-win
 ### Start and check
 - net start SignalRTest
 - sc query SignalRTest
+
+## Rodar .netCore
+https://dotnet.microsoft.com/download/dotnet/thank-you/sdk-3.1.408-windows-x64-installer
+dotnet run
