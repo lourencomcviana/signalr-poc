@@ -2,7 +2,7 @@ import {HubConnection} from '@microsoft/signalr';
 import {EMPTY, from, Observable, Subject, timer} from 'rxjs';
 
 
-export default abstract class HubConnectionObservable<T> {
+export default abstract class HubConnectionObservable {
   public static readonly RETRY_TIMER = 1000;
   private readonly hubConnection: HubConnection;
   private readonly onRecieveMessage: Subject<any[]> = new Subject<any[]>();
@@ -56,10 +56,6 @@ export default abstract class HubConnectionObservable<T> {
 
   public listen(): Observable<any[]>{
     return this.onRecieveMessage;
-  }
-
-  public parseServerResponse(...args: any[]): T {
-    return (args as unknown) as T;
   }
 
   public stop(): Observable<void> {

@@ -11,7 +11,7 @@ export const url = {
 @Injectable({
   providedIn: 'root'
 })
-export class ChatService extends  HubConnectionObservable<string>{
+export class ChatService extends  HubConnectionObservable{
 
   constructor() {
     super(createConnection(), 'ReceiveMessage', 'SendMessage');
@@ -20,14 +20,8 @@ export class ChatService extends  HubConnectionObservable<string>{
 }
 
 function createConnection(): HubConnection {
-  const connection = new signalR.HubConnectionBuilder()
+  return  new signalR.HubConnectionBuilder()
     .withUrl(url.chatHub)
     .build();
-
-  connection.on('send', data => {
-    console.log('enviou coisa');
-  });
-
-  return connection;
 }
 
