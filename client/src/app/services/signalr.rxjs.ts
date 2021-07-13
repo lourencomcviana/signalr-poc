@@ -1,8 +1,27 @@
 import {HubConnection} from '@microsoft/signalr';
 import {EMPTY, from, Observable, Subject, timer} from 'rxjs';
 
+export interface IHubConnectionObservable {
+  // retorna conexão no seu estado primitivo
+  readonly connection: HubConnection;
 
-export default abstract class HubConnectionObservable {
+  // inicia a conexão, ao concluir um cold observable notifica a conclusão
+  start(): Observable<void>;
+
+  // envia requisição e escuta o resultado através de um cold observable
+  send(...args: any[]): Observable<void>;
+
+  // iniciar a escutar a eventos por um hot observable
+  listen(): Observable<any[]>;
+
+  // paraliza a execução
+  stop(): Observable<void>;
+
+  // método utilizado para criar uma nova conexão, classe abstrata não deve implementar este método
+  create(): HubConnection;
+}
+
+export default abstract class HubConnectionObservable implements IHubConnectionObservable {
   public static readonly RETRY_TIMER = 1000;
   private readonly hubConnection: HubConnection;
   private readonly onRecieveMessage: Subject<any[]> = new Subject<any[]>();
@@ -10,11 +29,10 @@ export default abstract class HubConnectionObservable {
   private readonly sendEvent: string;
 
   constructor(
-    hubConnection: HubConnection,
     recieveEvent: string,
     sendEvent: string
   ) {
-    this.hubConnection = hubConnection;
+    this.hubConnection = this.create();
     this.recieveEvent = recieveEvent;
     this.sendEvent = sendEvent;
     this.hubConnection.onclose(err => {
@@ -34,11 +52,13 @@ export default abstract class HubConnectionObservable {
       }
     });
   }
-  public get connection(): HubConnection {
+
+  abstract create(): HubConnection;
+  get connection(): HubConnection {
     return this.hubConnection;
   }
 
-  public start(): Observable<void> {
+  start(): Observable<void> {
     const context = this;
     return from(this.hubConnection.start().then(res => {
       this.hubConnection.on(this.recieveEvent, callback);
@@ -46,19 +66,20 @@ export default abstract class HubConnectionObservable {
     }));
 
     function callback(args: any): void {
-      console.log(... arguments);
+      console.log(...arguments);
       context.onRecieveMessage.next(Array.prototype.slice.call(arguments));
     }
   }
-  public send(...args: any[]): Observable<void> {
-    return  from(this.connection.invoke(this.sendEvent, ... args));
+
+  send(...args: any[]): Observable<void> {
+    return from(this.connection.invoke(this.sendEvent, ...args));
   }
 
-  public listen(): Observable<any[]>{
+  listen(): Observable<any[]> {
     return this.onRecieveMessage;
   }
 
-  public stop(): Observable<void> {
+  stop(): Observable<void> {
     if (this.hubConnection) {
       return from(this.connection.stop());
     }

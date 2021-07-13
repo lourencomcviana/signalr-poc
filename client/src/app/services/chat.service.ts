@@ -14,14 +14,12 @@ export const url = {
 export class ChatService extends  HubConnectionObservable{
 
   constructor() {
-    super(createConnection(), 'ReceiveMessage', 'SendMessage');
+    super('ReceiveMessage', 'SendMessage');
   }
 
+  create(): HubConnection {
+    return  new signalR.HubConnectionBuilder()
+      .withUrl(url.chatHub)
+      .build();
+  }
 }
-
-function createConnection(): HubConnection {
-  return  new signalR.HubConnectionBuilder()
-    .withUrl(url.chatHub)
-    .build();
-}
-
