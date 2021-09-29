@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'https://localhost:5001'
+  apiBaseUrl: 'https://localhost:5001',
+  userApiUrl: 'http://localhost:5002',
+  ouathAuthorizerUrl: 'http://localhost:5003'
 };
 
 /*

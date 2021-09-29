@@ -4,6 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "mock-start": "mockoon-cli start --data ./mock/mock.json --all",
+    "mock-stop": "mockoon-cli stop all",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -19,6 +21,7 @@
     "@angular/platform-browser": "~11.2.9",
     "@angular/platform-browser-dynamic": "~11.2.9",
     "@angular/router": "~11.2.9",
+    "@auth0/angular-jwt": "^5.0.2",
     "@microsoft/signalr": "^5.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

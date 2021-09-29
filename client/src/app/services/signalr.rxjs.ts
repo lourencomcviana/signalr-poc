@@ -28,7 +28,7 @@ export default abstract class HubConnectionObservable implements IHubConnectionO
   private readonly recieveEvent: string;
   private readonly sendEvent: string;
 
-  constructor(
+  protected constructor(
     recieveEvent: string,
     sendEvent: string
   ) {

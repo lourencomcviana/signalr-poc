@@ -2,6 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import { ChartService } from './services/chart.service';
 import { ChatService } from './services/chat.service';
+import {TokenService} from './services/authentication/token.service';
+import {UserService} from './services/user.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +16,12 @@ export class AppComponent  implements OnInit {
   usuario: string;
   mensagem: string;
 
-  constructor(public signalRService: ChartService, public  chatService: ChatService, private http: HttpClient) {
+  constructor(
+    public signalRService: ChartService,
+    public  chatService: ChatService,
+    private http: HttpClient,
+    private userService: UserService
+  ) {
     this.messages = [];
     this.mensagem = '';
     this.usuario = '';
@@ -47,9 +55,11 @@ export class AppComponent  implements OnInit {
   }
 
   sendMessage(): void {
-    this.chatService.send(this.usuario, this.mensagem)
-      .subscribe(() => {
-        console.log('mensagem enviada!');
-      });
+    this.userService.getUser().subscribe(user => {
+      this.chatService.send(user.users[0].firstname, this.mensagem)
+        .subscribe(() => {
+          console.log('mensagem enviada!');
+        });
+    });
   }
 }
