@@ -9,7 +9,7 @@ export default abstract class HubConnectionObservable {
   private readonly recieveEvent: string;
   private readonly sendEvent: string;
 
-  constructor(
+  protected constructor(
     hubConnection: HubConnection,
     recieveEvent: string,
     sendEvent: string
