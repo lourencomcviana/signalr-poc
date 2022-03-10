@@ -7,8 +7,8 @@ import {EventManager} from '@angular/platform-browser';
 })
 export class SessionStorageService extends BaseStorageService{
 
-  constructor(eventManger: EventManager) {
-    super('ss', sessionStorage, eventManger);
+  constructor() {
+    super('ss', sessionStorage);
   }
 }
 
@@ -17,8 +17,8 @@ export class SessionStorageService extends BaseStorageService{
 })
 export class LocalStorageService extends BaseStorageService{
 
-  constructor(eventManger: EventManager) {
-    super('ls', localStorage, eventManger);
+  constructor() {
+    super('ls', localStorage);
   }
 }
 

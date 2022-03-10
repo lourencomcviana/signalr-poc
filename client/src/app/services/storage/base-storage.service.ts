@@ -2,7 +2,6 @@ import {EventManager} from '@angular/platform-browser';
 
 export default abstract class BaseStorageService {
   protected constructor(private prefix: string, protected storage: Storage) {
-    vbvvbvbvb
   }
 
   public static Map<T  extends object>(source: any, destination: any): T {
