@@ -1,13 +1,14 @@
 import {Injectable} from '@angular/core';
 import BaseStorageService from './base-storage.service';
+import {EventManager} from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionStorageService extends BaseStorageService{
 
-  constructor() {
-    super('ss', sessionStorage);
+  constructor(eventManger: EventManager) {
+    super('ss', sessionStorage, eventManger);
   }
 }
 
@@ -16,8 +17,8 @@ export class SessionStorageService extends BaseStorageService{
 })
 export class LocalStorageService extends BaseStorageService{
 
-  constructor() {
-    super('ls', localStorage);
+  constructor(eventManger: EventManager) {
+    super('ls', localStorage, eventManger);
   }
 }
 

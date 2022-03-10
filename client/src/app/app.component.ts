@@ -4,6 +4,7 @@ import { ChartService } from './services/chart.service';
 import { ChatService } from './services/chat.service';
 import {TokenService} from './services/authentication/token.service';
 import {UserService} from './services/user.service';
+import {LocalStorageService} from "./services/storage/storage.service";
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,13 @@ export class AppComponent  implements OnInit {
     public signalRService: ChartService,
     public  chatService: ChatService,
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    private localStorage: LocalStorageService
   ) {
     this.messages = [];
     this.mensagem = '';
     this.usuario = '';
+    this.localStorage.save('teste', 'teste');
   }
 
   ngOnInit(): void {
