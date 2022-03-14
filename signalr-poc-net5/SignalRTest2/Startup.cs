@@ -28,13 +28,15 @@ namespace SignalRTest2
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder => builder
-                        .AllowAnyOrigin()
+                        .WithOrigins("http://localhost:4200")
+                        .AllowCredentials()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
 
                     // .AllowAnyOrigin()
                 );
             });
+
             
             services.AddSignalR();
             services.AddControllers();
